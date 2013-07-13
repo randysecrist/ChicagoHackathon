@@ -20,7 +20,10 @@ https.get("https://data.cityofchicago.org/api/views/q3z3-udcz/rows.json?accessTy
 
 
 function parse(json) {
-  var geoJson = { type : "FeatureCollection", features: [] };
+  var geoJson = {
+    type : "FeatureCollection", features: [],
+    crs : { type : "name", properties : { name : "urn:ogc:def:crs:OGC:1.3:CRS84" } }
+  };
   var id = 0;
   for( var i in json.data ) {
     var row = json.data[i];
