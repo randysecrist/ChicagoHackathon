@@ -48,14 +48,9 @@ function FetchCtrl($scope, $http, $templateCache) {
         });
 
         var map = L.map('map')
-            .addLayer(cloudmade);
+          .addLayer(cloudmade);
 
         var markers = L.markerClusterGroup();
-
-        for (var i=0; i < data['features'].length; i++) {
-          var geoJsonFeature = data['features'][i]
-
-        }
 
         var geoJsonLayer = L.geoJson(data, {
           pointToLayer: function(f, latlon) {
