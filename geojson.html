@@ -3,8 +3,6 @@
 <head>
 <title>Chicago Data</title>
 
-<!-- <script src="jquery-1.6.4.min.js"></script> -->
-
 <!-- Angular JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
@@ -24,6 +22,7 @@
 <script src="resources/leaflet.markercluster-src.js"></script>
 
 <script type="text/javascript">
+var map = null;
 function FetchCtrl($scope, $http, $templateCache) {
   $scope.method = 'GET';
   $scope.url = 'http-geojson.html';
@@ -43,12 +42,17 @@ function FetchCtrl($scope, $http, $templateCache) {
 
         var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
           maxZoom: 18,
-          attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+          attribution: 'Map data &copy; 2013 OpenStreetMap contributors, Imagery &copy; 2013 CloudMade',
           key: 'BC9A493B41014CAABB98F0471D759707'
         });
 
-        var map = L.map('map')
-          .addLayer(cloudmade);
+        try {
+          map = L.map('map')
+            .addLayer(cloudmade);
+        }
+        catch (Exception) {
+          map.remove();
+        }
 
         var markers = L.markerClusterGroup();
 
